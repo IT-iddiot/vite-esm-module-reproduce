@@ -15,11 +15,11 @@ function createStore() {
         const todoList = [
           {
             id: 0,
-            text: 'Buy milk'
+            text: 'Uncomment 18 - 21 for global property editing'
           },
           {
             id: 1,
-            text: 'Buy chocolate'
+            text: 'Uncomment 24 - 26 for injected variable editing'
           }
         ]
         return commit('setTodoList', todoList)

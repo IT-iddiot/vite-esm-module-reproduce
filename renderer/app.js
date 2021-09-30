@@ -3,11 +3,16 @@ import { createStore } from './store'
 
 export { createApp }
 
-function createApp({ Page }) {
+function createApp(pageContext) {
   const app = createSSRApp({
-    render: () => h(Page)
+    render: () => h(pageContext.Page)
   })
+
   const store = createStore()
   app.use(store)
+
+  app.config.globalProperties.$pageContext = pageContext;
+  app.provide('pageContext', pageContext);
+
   return { app, store }
 }

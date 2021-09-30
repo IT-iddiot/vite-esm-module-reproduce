@@ -6,7 +6,7 @@ export { render }
 export { onBeforeRender }
 export { passToClient }
 
-const passToClient = ['INITIAL_STATE']
+const passToClient = ['INITIAL_STATE', 'documentProps']
 
 async function render(pageContext) {
   const { appHtml, documentProps } = pageContext
@@ -30,7 +30,7 @@ async function render(pageContext) {
 async function onBeforeRender(pageContext) {
   const { Page } = pageContext
   const { app, store } = createApp({ Page })
-
+  
   const appHtml = await renderToString(app)
 
   const INITIAL_STATE = store.state
