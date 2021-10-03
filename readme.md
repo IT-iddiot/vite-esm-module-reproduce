@@ -1,10 +1,12 @@
-Example of using `vite-plugin-ssr` with Vue and Vuex.
+To reproduce `Unexpected token 'export'` when using [vue-meta@next](https://github.com/nuxt/vue-meta/tree/next#ssr) with vite
 
 To run it:
 
 ```bash
-git clone git@github.com:brillout/vite-plugin-ssr
-cd vite-plugin-ssr/examples/vuex/
+git clone git@github.com:IT-iddiot/vite-esm-module-reproduce.git
+cd vite-esm-module-reproduce
 npm install
-npm run start
+npm run dev
 ```
+Check your terminal now
+
