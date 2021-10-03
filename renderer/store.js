@@ -15,12 +15,8 @@ function createStore() {
         const todoList = [
           {
             id: 0,
-            text: 'Uncomment 18 - 21 for global property editing'
+            text: 'Refer node terminal for error'
           },
-          {
-            id: 1,
-            text: 'Uncomment 24 - 26 for injected variable editing'
-          }
         ]
         return commit('setTodoList', todoList)
       }

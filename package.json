@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node ./server"
+    "dev": "node ./server"
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^1.8.0",
@@ -10,6 +10,7 @@
     "vite": "^2.5.10",
     "vite-plugin-ssr": "0.3.3",
     "vue": "^3.2.12",
+    "vue-meta": "^3.0.0-alpha.9",
     "vuex": "^4.0.0"
   }
 }

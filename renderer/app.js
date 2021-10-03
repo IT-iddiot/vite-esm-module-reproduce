@@ -1,5 +1,6 @@
 import { createSSRApp, h } from 'vue'
 import { createStore } from './store'
+import { createMetaManager } from 'vue-meta'
 
 export { createApp }
 
@@ -11,8 +12,8 @@ function createApp(pageContext) {
   const store = createStore()
   app.use(store)
 
-  app.config.globalProperties.$pageContext = pageContext;
-  app.provide('pageContext', pageContext);
+  const metaManager = createMetaManager()
+  app.use(metaManager)
 
-  return { app, store }
+  return { app, store, metaManager }
 }

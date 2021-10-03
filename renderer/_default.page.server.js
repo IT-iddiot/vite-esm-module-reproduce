@@ -1,5 +1,6 @@
 import { renderToString } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
+import { renderMetaToString } from 'vue-meta/ssr'
 import { createApp } from './app'
 
 export { render }
@@ -14,31 +15,35 @@ async function render(pageContext) {
   const title = documentProps?.title ?? 'SpaceX'
   const description = documentProps?.description ?? 'We deliver payload to space.'
 
-  return escapeInject`<html>
-    <head>
-      <title>${title}</title>
-      <meta name="description" content="${description}">
-    </head>
-    <body>
-      <div id="root">
-        ${dangerouslySkipEscape(appHtml)}
-      </div>
-    </body>
-  </html>`
+  return escapeInject`
+    <html ${ctx.teleports.htmlAttrs || ''}>
+      <head ${ctx.teleports.headAttrs || ''}>
+      ${ctx.teleports.head || ''}
+      </head>
+      <body ${ctx.teleports.bodyAttrs || ''}>
+        <div id="app">${dangerouslySkipEscape(appHtml)}</div>
+      ${ctx.teleports.body || ''}
+      </body>
+    </html>`
 }
 
 async function onBeforeRender(pageContext) {
   const { Page } = pageContext
-  const { app, store } = createApp({ Page })
+  const { app, store, metaManager } = createApp({ Page })
   
-  const appHtml = await renderToString(app)
+  app.use(metaManager)
+  const ctx = {};
+
+  const appHtml = await renderToString(app, ctx)
+  await renderMetaToString(app, ctx)
 
   const INITIAL_STATE = store.state
 
   return {
     pageContext: {
       INITIAL_STATE,
-      appHtml
+      appHtml,
+      ctx,
     }
   }
 }
