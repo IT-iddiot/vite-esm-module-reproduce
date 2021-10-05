@@ -9,10 +9,13 @@ export { passToClient }
 const passToClient = ['INITIAL_STATE']
 
 async function render(pageContext) {
-  const { appHtml, documentProps } = pageContext
+  const { appHtml, INITIAL_STATE } = pageContext
 
-  const title = documentProps?.title ?? 'SpaceX'
-  const description = documentProps?.description ?? 'We deliver payload to space.'
+  /**
+   * assign custom meta info here
+   */
+  const title = INITIAL_STATE?.title ?? 'Default title here'
+  const description = INITIAL_STATE?.description ?? 'Default description here'
 
   return escapeInject`<html>
     <head>

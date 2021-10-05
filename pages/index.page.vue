@@ -1,19 +1,47 @@
 <template>
-  <h1>To-do List</h1>
-  <ul>
-    <li v-for="item in todoList" :key="item.id">{{ item.text }}</li>
-  </ul>
+    <div style="margin: 20px auto">
+        <h4>
+            Updated title:
+            <span style="color: blue">{{ $store.state.title }}</span>
+        </h4>
+        <h4>
+            Updated description:
+            <span style="color: blue">{{ $store.state.description }}</span>
+        </h4>
+    </div>
 </template>
 
-<script>
-export default {
-  serverPrefetch() {
-    return this.$store.dispatch('fetchTodoList')
-  },
-  computed: {
-    todoList() {
-      return this.$store.state.todoList
-    }
-  }
-}
+<script setup>
+/**
+ * Composition API
+ */
+import { useStore } from "vuex";
+
+/**
+ * All the code inside <script setup> will run around
+ * the beforeCreate and created lifecycle hooks, unless
+ * you explicitly wrap the code under other lifecycle.
+ * Refer: https://v3.vuejs.org/guide/composition-api-lifecycle-hooks.html#lifecycle-hooks
+ */
+const store = useStore();
+
+store.commit("setMetaInfo", {
+    title: "Custom title",
+    description: "Custom description",
+});
 </script>
+
+
+// <script>
+// /**
+//  * Option API
+//  */
+// export default {
+//   created() {
+//     this.$store.commit('setMetaInfo', {
+//       title: "custom title",
+//       description: "custom description",
+//     })
+//   },
+// }
+// </script>

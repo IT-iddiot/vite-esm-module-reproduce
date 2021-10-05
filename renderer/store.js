@@ -6,29 +6,16 @@ function createStore() {
   const store = Vuex.createStore({
     state() {
       return {
-        todoList: []
-      }
-    },
-
-    actions: {
-      fetchTodoList({ commit }) {
-        const todoList = [
-          {
-            id: 0,
-            text: 'Buy milk'
-          },
-          {
-            id: 1,
-            text: 'Buy chocolate'
-          }
-        ]
-        return commit('setTodoList', todoList)
+        todoList: [],
+        title: 'I am default title',
+        description: 'I am default description',
       }
     },
 
     mutations: {
-      setTodoList(state, todoList) {
-        state.todoList = todoList
+      setMetaInfo(state, { title, description }) {
+        state.title = title;
+        state.description = description
       }
     }
   })
